@@ -16,7 +16,8 @@
     if (self) {
         _patientName = name;
         _patientAge = age;
-        _healthCard = &option;
+        _healthCard = option;
+        _patientTag = @"NO";
     }
     return self;
 }

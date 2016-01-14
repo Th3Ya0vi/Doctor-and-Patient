@@ -14,7 +14,7 @@
 @property (nonatomic, assign) NSUInteger patientAge;
 @property (nonatomic, copy) NSString *patientTag;
 
-@property (nonatomic) BOOL *healthCard;
+@property (nonatomic) BOOL healthCard;
 
 - (instancetype)initWithPatientName:(NSString *)name andAge:(NSUInteger)age andHealthCard:(BOOL)option;
 

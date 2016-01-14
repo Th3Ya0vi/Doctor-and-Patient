@@ -30,9 +30,9 @@ int main(int argc, const char * argv[]) {
 
         while (![usersOption isEqualToString:@"exit"]) {
         
-        usersOption = [userInput inputForPrompt:@"\nAdd new record - add\nView Patients- vp\nView Doctors - vd\nExit - exit\n"];
+        usersOption = [userInput inputForPrompt:@"\nAdd new doctor record - adddoc\nAdd new patient - addpat\nView Patients- viewpat\nView Doctors - viewdoc\nExit - exit\n"];
             
-            if ([usersOption isEqualToString:@"add"]) {
+            if ([usersOption isEqualToString:@"adddoc"]) {
         NSString *doctorsName = [userInput inputForPrompt:@"Enter Doctor's Name"];
         NSString *doctorsSpecialization = [userInput inputForPrompt:@"Enter Doctor's Specialization"];
         
@@ -42,43 +42,66 @@ int main(int argc, const char * argv[]) {
         
                 [doctorDB addDoctorsToArray:doctor];
             }
-            else if ([usersOption isEqualToString:@"vd"])
+            else if ([usersOption isEqualToString:@"viewdoc"])
             {
                 [doctorDB displayDoctorsArray];
             }
+            else if ([usersOption isEqualToString:@"viewpat"])
+            {
+                [patientDB displayPatientsArray];
+            }
+            else if ([usersOption isEqualToString:@"addpat"])
+            {
+                NSString *patientsName = [userInput inputForPrompt:@"Enter Patient's Name"];
+                NSString *patientsAgeString = [userInput inputForPrompt:@"Enter Patient's Age"];
+                NSUInteger patientsAge = [patientsAgeString intValue];
+                
+                NSString *patientsHealthCard = [userInput inputForPrompt:@"Do you have a health card (YES/NO)?"];
+                
+                BOOL patientHC;
+                
+                if ([patientsHealthCard isEqualToString:@"YES"] || [patientsHealthCard isEqualToString:@"yes"]) {
+                    patientHC = YES;
+                }
+                else {
+                    patientHC = NO;
+                }
+                
+                Patient *patient = [[Patient alloc] initWithPatientName:patientsName andAge:patientsAge andHealthCard:patientHC];
+                
+                [patientDB addPatientsToArray:patient];
+
+            }
         }
-    
     } else if ([usersOption isEqualToString:@"patient"]) {
         
         usersOption = @"startingPatient";
         
         while (![usersOption isEqualToString:@"exit"]) {
             
-            usersOption = [userInput inputForPrompt:@"\nAdd new record - add\nView Patients- vp\nView Doctors - vd\nExit - exit\n"];
+            usersOption = [userInput inputForPrompt:@"\nView Doctors- viewdoc\nView Patients - select\nView Request - status\nExit - exit\n"];
             
-            if ([usersOption isEqualToString:@"add"]) {
-        
-        NSString *patientsName = [userInput inputForPrompt:@"Enter Patient's Name"];
-        NSString *patientsAgeString = [userInput inputForPrompt:@"Enter Patient's Age"];
-        NSUInteger patientsAge = [patientsAgeString intValue];
-        
-        NSString *patientsHealthCard = [userInput inputForPrompt:@"Do you have a health card (YES/NO)?"];
-        
-        BOOL patientHC;
-        if ([patientsHealthCard isEqualToString:@"YES"] || [patientsHealthCard isEqualToString:@"yes"]) {
-            patientHC = YES;
-        }
-        else {
-            patientHC = NO;
-        }
-        
-        Patient *patient = [[Patient alloc] initWithPatientName:patientsName andAge:patientsAge andHealthCard:patientHC];
-        
-                [patientDB addPatientsToArray:patient];
-            }
-            else if ([usersOption isEqualToString:@"view"])
+            if ([usersOption isEqualToString:@"viewdoc"])
             {
+                [doctorDB displayDoctorsArray];
+                
+            }
+            else if ([usersOption isEqualToString:@"select"])
+            {
+                //NSString *selectDoc = [userInput inputForPrompt:@"Enter Doctor Index"];
+                //NSUInteger indexDoc = [selectDoc intValue];
+                
+                // call method to get accepted
                 [patientDB displayPatientsArray];
+                NSString *selectPat = [userInput inputForPrompt:@"Enter Patient Index"];
+                NSUInteger indexPat = [selectPat intValue];
+                
+                [patientDB canPatientBeAccepted:indexPat];
+                
+                [patientDB displayPatientsArray];
+                
+                // need this to ask user for index and pick a doc
+                //[patientDB displayPatientsArray];
             }
         }
     } else {
