@@ -10,22 +10,23 @@
 
 @implementation Doctor
 
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        _doctorSerialNumber = 0;
-    }
-    return self;
-}
+//- (instancetype)init
+//{
+//    self = [super init];
+//    if (self) {
+//        _doctorSerialNumber = 0;
+//    }
+//    return self;
+//}
 
 - (instancetype)initWithDoctorName:(NSString *)name andSpecialization:(NSString *)specialization
 {
     self = [super init];
     if (self) {
-        _doctorSerialNumber = _doctorSerialNumber + 1;
+        //_doctorSerialNumber = _doctorSerialNumber + 1;
         _doctorName = name;
         _doctorSpecialization = specialization;
+        _requests = 0;
     }
     return self;
 }

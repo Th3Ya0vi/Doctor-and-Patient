@@ -18,6 +18,7 @@
         _patientAge = age;
         _healthCard = option;
         _patientTag = @"NO";
+        _patientPrescription = [[NSMutableArray alloc] init];
     }
     return self;
 }

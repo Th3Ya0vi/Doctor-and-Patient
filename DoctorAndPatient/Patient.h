@@ -13,8 +13,8 @@
 @property (nonatomic, copy) NSString *patientName;
 @property (nonatomic, assign) NSUInteger patientAge;
 @property (nonatomic, copy) NSString *patientTag;
-
 @property (nonatomic) BOOL healthCard;
+@property (nonatomic, strong) NSMutableArray *patientPrescription;
 
 - (instancetype)initWithPatientName:(NSString *)name andAge:(NSUInteger)age andHealthCard:(BOOL)option;
 

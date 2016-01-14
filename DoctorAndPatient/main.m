@@ -30,7 +30,7 @@ int main(int argc, const char * argv[]) {
 
         while (![usersOption isEqualToString:@"exit"]) {
         
-        usersOption = [userInput inputForPrompt:@"\nAdd new doctor record - adddoc\nAdd new patient - addpat\nView Patients- viewpat\nView Doctors - viewdoc\nExit - exit\n"];
+        usersOption = [userInput inputForPrompt:@"\nAdd new doctor record - adddoc\nAdd new patient record - addpat\nView Patients- viewpat\nView Doctors - viewdoc\nTreat a patient - treat\nExit - exit\n"];
             
             if ([usersOption isEqualToString:@"adddoc"]) {
         NSString *doctorsName = [userInput inputForPrompt:@"Enter Doctor's Name"];
@@ -70,7 +70,13 @@ int main(int argc, const char * argv[]) {
                 Patient *patient = [[Patient alloc] initWithPatientName:patientsName andAge:patientsAge andHealthCard:patientHC];
                 
                 [patientDB addPatientsToArray:patient];
-
+            }
+            else if ([usersOption isEqualToString:@"treat"])
+            {
+                [doctorDB displayDoctorsArray];
+                NSString *selectDocByDoc = [userInput inputForPrompt:@"Enter Doctor Index"];
+                NSUInteger indexDocByDoc = [selectDocByDoc intValue];
+                
             }
         }
     } else if ([usersOption isEqualToString:@"patient"]) {
@@ -88,20 +94,24 @@ int main(int argc, const char * argv[]) {
             }
             else if ([usersOption isEqualToString:@"select"])
             {
-                //NSString *selectDoc = [userInput inputForPrompt:@"Enter Doctor Index"];
-                //NSUInteger indexDoc = [selectDoc intValue];
-                
                 // call method to get accepted
                 [patientDB displayPatientsArray];
                 NSString *selectPat = [userInput inputForPrompt:@"Enter Patient Index"];
                 NSUInteger indexPat = [selectPat intValue];
                 
-                [patientDB canPatientBeAccepted:indexPat];
+                NSUInteger whetherPatientwasAccepted = [patientDB canPatientBeAccepted:indexPat];
                 
+                if (whetherPatientwasAccepted == 1) {
+                    [doctorDB displayDoctorsArray];
+                NSString *selectDocByPatient = [userInput inputForPrompt:@"Enter Doctor Index"];
+                NSUInteger indexDocByPatient = [selectDocByPatient intValue];
+                    [doctorDB sendRequestToDoctor:indexDocByPatient];
+                    NSLog(@"Your request has been sent");
+                }
                 [patientDB displayPatientsArray];
                 
                 // need this to ask user for index and pick a doc
-                //[patientDB displayPatientsArray];
+                
             }
         }
     } else {

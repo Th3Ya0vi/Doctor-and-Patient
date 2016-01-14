@@ -34,10 +34,10 @@
     
     NSUInteger length = [self.doctors count];
     NSLog(@"%lu", (unsigned long)length);
-    NSLog(@"Name\t\t\tSpecialist");
+    NSLog(@"Index\tName\t\t\tSpecialist\tRequests");
     for (int i = 0; i < length; i++){
         Doctor *displaydoctor = [self.doctors objectAtIndex:i];
-        NSLog(@"Dr. %@\t\t%@", displaydoctor.doctorName, displaydoctor.doctorSpecialization);
+        NSLog(@"(%d)\t\tDr. %@\t\t%@\t\t%lu", i, displaydoctor.doctorName, displaydoctor.doctorSpecialization, (unsigned long)displaydoctor.requests);
     }
 }
 
@@ -48,19 +48,37 @@
     NSLog(@"Index\tName\tAge\tHC\tRequest");
     for (int i = 0; i < length; i++){
         Patient *displaypatient = [self.patients objectAtIndex:i];
-        NSLog(@"(%d) \t%@\t%lu\t%@\t\t%@", i, displaypatient.patientName, (unsigned long)displaypatient.patientAge, displaypatient.healthCard ? @"YES" : @"NO", displaypatient.patientTag);
+        NSLog(@"(%d)\t\t%@\t%lu\t%@\t\t%@", i, displaypatient.patientName, (unsigned long)displaypatient.patientAge, displaypatient.healthCard ? @"YES" : @"NO", displaypatient.patientTag);
     }
 }
 
--(void)canPatientBeAccepted:(NSUInteger)index {
+-(NSUInteger)canPatientBeAccepted:(NSUInteger)index {
         Patient *displaypatient = [self.patients objectAtIndex:index];
     if (displaypatient.healthCard) {
         displaypatient.patientTag = @"YES";
-        NSLog(@"Your request has been sent");
+        NSUInteger length = [self.doctors count];
+        NSLog(@"Index\tName\t\t\tSpecialist");
+        for (int i = 0; i < length; i++){
+            Doctor *displaydoctor = [self.doctors objectAtIndex:i];
+            NSLog(@"(%d)\tDr. %@\t\t%@", i, displaydoctor.doctorName, displaydoctor.doctorSpecialization);
+        }
+        return 1;
     } else {
         NSLog(@"You do not have a health card");
+        return 0;
     }
 }
+
+-(void)sendRequestToDoctor:(NSUInteger)index {
+    Doctor *displayDoctor = [self.doctors objectAtIndex:index];
+    displayDoctor.requests = displayDoctor.requests + 1;
+}
+
+
+
+
+
+
 
 
 @end

@@ -23,6 +23,8 @@
 
 -(void)displayPatientsArray;
 
--(void)canPatientBeAccepted:(NSUInteger)index;
+-(NSUInteger)canPatientBeAccepted:(NSUInteger)index;
+
+-(void)sendRequestToDoctor:(NSUInteger)index;
 
 @end
