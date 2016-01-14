@@ -73,9 +73,35 @@ int main(int argc, const char * argv[]) {
             }
             else if ([usersOption isEqualToString:@"treat"])
             {
+                // display doc list to identify which doc has open requests
                 [doctorDB displayDoctorsArray];
                 NSString *selectDocByDoc = [userInput inputForPrompt:@"Enter Doctor Index"];
                 NSUInteger indexDocByDoc = [selectDocByDoc intValue];
+                
+                // verify doc has request
+                NSUInteger doesDocHasRequests = [doctorDB verifyDocHasRequests:indexDocByDoc];
+
+                if (doesDocHasRequests == 1) {
+                    
+                    // check patient index before writing prescription
+                    [patientDB displayPatientsArray];
+                    NSString *selectPatByDoc = [userInput inputForPrompt:@"Enter Patient Index"];
+                    NSUInteger indexPatByDoc = [selectPatByDoc intValue];
+                    
+                    NSUInteger patientHasRaisedRequest = [patientDB verifyPatientHasRaisedRequests:indexPatByDoc];
+                    
+                    if (patientHasRaisedRequest == 1) {
+                    
+                    NSString *prescriptionForPatient = [userInput inputForPrompt:@"Write Prescription"];
+                    
+                    [patientDB updatePatientPrescription:indexPatByDoc andPrescription:prescriptionForPatient];
+
+                    }
+                    
+                } else {
+                    // no request
+                    NSLog(@"Hey Doc, You don't have any open requests");
+                }
                 
             }
         }

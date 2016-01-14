@@ -45,10 +45,10 @@
     
     NSUInteger length = [self.patients count];
     NSLog(@"%lu", (unsigned long)length);
-    NSLog(@"Index\tName\tAge\tHC\tRequest");
+    NSLog(@"Index\tName\tAge\tHC\tRequest\tPrescription");
     for (int i = 0; i < length; i++){
         Patient *displaypatient = [self.patients objectAtIndex:i];
-        NSLog(@"(%d)\t\t%@\t%lu\t%@\t\t%@", i, displaypatient.patientName, (unsigned long)displaypatient.patientAge, displaypatient.healthCard ? @"YES" : @"NO", displaypatient.patientTag);
+        NSLog(@"(%d)\t\t%@\t%lu\t%@\t\t%@\t%@", i, displaypatient.patientName, (unsigned long)displaypatient.patientAge, displaypatient.healthCard ? @"YES" : @"NO", displaypatient.patientTag, displaypatient.patientPrescription);
     }
 }
 
@@ -74,11 +74,31 @@
     displayDoctor.requests = displayDoctor.requests + 1;
 }
 
+-(NSUInteger)verifyDocHasRequests:(NSUInteger)index {
+    Doctor *openRequests = [self.doctors objectAtIndex:index];
+    if (openRequests.requests >= 1) {
+        openRequests.requests = openRequests.requests - 1;
+        return 1;
+    } else {
+        return 0;
+    }
+}
 
-
-
-
-
+-(NSUInteger)verifyPatientHasRaisedRequests:(NSUInteger)index {
+    Patient *openRequests = [self.patients objectAtIndex:index];
+    if ([openRequests.patientTag isEqualToString:@"YES"]) {
+        return 1;
+    } else {
+        NSLog(@"This patient does not have an open request");
+        return 0;
+    }
+}
+-(void)updatePatientPrescription:(NSUInteger)index andPrescription:(NSString *)string {
+    Patient *displayPatient = [self.patients objectAtIndex:index];
+        [displayPatient.patientPrescription addObject:string];
+        displayPatient.patientTag = @"NO";
+    
+}
 
 
 @end

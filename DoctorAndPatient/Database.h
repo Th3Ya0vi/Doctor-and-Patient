@@ -27,4 +27,10 @@
 
 -(void)sendRequestToDoctor:(NSUInteger)index;
 
+-(NSUInteger)verifyDocHasRequests:(NSUInteger)index;
+
+-(void)updatePatientPrescription:(NSUInteger)index andPrescription:(NSString *)string;
+
+-(NSUInteger)verifyPatientHasRaisedRequests:(NSUInteger)index;
+
 @end
