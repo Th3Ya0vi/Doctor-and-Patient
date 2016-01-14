@@ -10,12 +10,13 @@
 
 @implementation Patient
 
-- (instancetype)initWithPatientName:(NSString *)name andAge:(NSNumber *)age
+- (instancetype)initWithPatientName:(NSString *)name andAge:(NSUInteger)age andHealthCard:(BOOL)option
 {
     self = [super init];
     if (self) {
         _patientName = name;
         _patientAge = age;
+        _healthCard = &option;
     }
     return self;
 }

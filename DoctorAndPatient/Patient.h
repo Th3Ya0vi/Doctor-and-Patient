@@ -11,7 +11,11 @@
 @interface Patient : NSObject
 
 @property (nonatomic, copy) NSString *patientName;
-@property (nonatomic, assign) NSNumber *patientAge;
+@property (nonatomic, assign) NSUInteger patientAge;
+@property (nonatomic, copy) NSString *patientTag;
 
+@property (nonatomic) BOOL *healthCard;
+
+- (instancetype)initWithPatientName:(NSString *)name andAge:(NSUInteger)age andHealthCard:(BOOL)option;
 
 @end
