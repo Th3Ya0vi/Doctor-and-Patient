@@ -1,5 +1,5 @@
 //
-//  main.m
+//  Doctor.h
 //  DoctorAndPatient
 //
 //  Created by Narendra Thapa on 2016-01-14.
@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-int main(int argc, const char * argv[]) {
-    
-    
-    
-    
-    return 0;
-}
+@interface Doctor : NSObject
+
+@property (nonatomic, copy) NSString *doctorName;
+@property (nonatomic, copy) NSString *doctorSpecialization;
+
+
+@end

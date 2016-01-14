@@ -1,5 +1,5 @@
 //
-//  main.m
+//  InputCollector.h
 //  DoctorAndPatient
 //
 //  Created by Narendra Thapa on 2016-01-14.
@@ -8,10 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-int main(int argc, const char * argv[]) {
-    
-    
-    
-    
-    return 0;
-}
+@interface InputCollector : NSObject
+
+-(NSString *)inputForPrompt:(NSString *)promptString;           // method to ask user for input string
+
+
+@end
