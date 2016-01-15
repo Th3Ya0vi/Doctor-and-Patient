@@ -15,30 +15,32 @@
 @property (nonatomic, strong) NSMutableArray *doctors;
 @property (nonatomic, strong) NSMutableArray *patients;
 
--(void)addDoctorsToArray:(Doctor *)doctor;
+-(void)addDoctorsToArray:(Doctor *)doctor;                          // Add doctor object to doctor array
 
--(void)addPatientsToArray:(Patient *)patient;
+-(void)addPatientsToArray:(Patient *)patient;                       // Add patient object to patient array
 
--(void)displayDoctorsArray;
+-(void)displayDoctorsArray;                                         // Displays list of doctors
 
--(void)displayPatientsArray;
+-(void)displayPatientsArray;                                        // Displays list of patients
 
--(NSUInteger)canPatientBeAccepted:(NSUInteger)index;
+-(NSUInteger)canPatientBeAccepted:(NSUInteger)index;                // Checks patient HealthCard value
 
--(void)sendRequestToDoctor:(NSUInteger)index;
+-(void)sendRequestToDoctor:(NSUInteger)index;                       // Update doctor request count (increment)
 
--(void)updatePatientRequests:(NSUInteger)index;
+-(void)updatePatientRequests:(NSUInteger)index;                     // Update patient request count (increment)
 
--(NSUInteger)verifyDocHasRequests:(NSUInteger)index;
+-(NSUInteger)verifyDocHasRequests:(NSUInteger)index;                // Checks if doctor request number is more than 0
 
--(void)updatePatientPrescription:(NSUInteger)patientindex andPrescription:(NSString *)string;
+-(NSUInteger)verifyPatientHasRaisedRequests:(NSUInteger)index;      // Checks if patient request number is more than 0
 
--(void)updateDoctorRequests:(NSUInteger)doctorIndex;
+-(void)updatePatientPrescription:(NSUInteger)patientindex andPrescription:(NSString *)string;   // Add prescription to patient object and decrement request count
 
--(NSUInteger)verifyPatientHasRaisedRequests:(NSUInteger)index;
+-(void)updateDoctorRequests:(NSUInteger)doctorIndex;                // Update doctor request count (decrement)
 
--(NSUInteger)checkIndexInArrayRangePatients:(NSUInteger)index;
+-(NSUInteger)checkIndexInArrayRangePatients:(NSUInteger)index;      // Checks index value entered for patient is not beyond length of array
 
--(NSUInteger)checkIndexInArrayRangeDoctors:(NSUInteger)index;
+-(NSUInteger)checkIndexInArrayRangeDoctors:(NSUInteger)index;       // Checks index value entered for doctor is not beyond length of array
 
+-(NSUInteger)indexValueShouldNotbeString:(NSString *)inputString;   // Checks that user input for index is not string
+                                                                    // if string is entered its converted to integer value of 0
 @end
