@@ -27,10 +27,18 @@
 
 -(void)sendRequestToDoctor:(NSUInteger)index;
 
+-(void)updatePatientRequests:(NSUInteger)index;
+
 -(NSUInteger)verifyDocHasRequests:(NSUInteger)index;
 
--(void)updatePatientPrescription:(NSUInteger)index andPrescription:(NSString *)string;
+-(void)updatePatientPrescription:(NSUInteger)patientindex andPrescription:(NSString *)string;
+
+-(void)updateDoctorRequests:(NSUInteger)doctorIndex;
 
 -(NSUInteger)verifyPatientHasRaisedRequests:(NSUInteger)index;
+
+-(NSUInteger)checkIndexInArrayRangePatients:(NSUInteger)index;
+
+-(NSUInteger)checkIndexInArrayRangeDoctors:(NSUInteger)index;
 
 @end

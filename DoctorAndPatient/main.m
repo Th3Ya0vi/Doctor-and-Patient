@@ -78,6 +78,10 @@ int main(int argc, const char * argv[]) {
                 NSString *selectDocByDoc = [userInput inputForPrompt:@"Enter Doctor Index"];
                 NSUInteger indexDocByDoc = [selectDocByDoc intValue];
                 
+                NSUInteger validDocIndex = [doctorDB checkIndexInArrayRangeDoctors:indexDocByDoc];
+                
+                if (validDocIndex == 1) {
+                    
                 // verify doc has request
                 NSUInteger doesDocHasRequests = [doctorDB verifyDocHasRequests:indexDocByDoc];
 
@@ -88,20 +92,30 @@ int main(int argc, const char * argv[]) {
                     NSString *selectPatByDoc = [userInput inputForPrompt:@"Enter Patient Index"];
                     NSUInteger indexPatByDoc = [selectPatByDoc intValue];
                     
+                    NSUInteger validPatientIndex = [patientDB checkIndexInArrayRangePatients:indexPatByDoc];
+                    
+                    if (validPatientIndex == 1) {
+                    
                     NSUInteger patientHasRaisedRequest = [patientDB verifyPatientHasRaisedRequests:indexPatByDoc];
                     
                     if (patientHasRaisedRequest == 1) {
                     
                     NSString *prescriptionForPatient = [userInput inputForPrompt:@"Write Prescription"];
-                    
                     [patientDB updatePatientPrescription:indexPatByDoc andPrescription:prescriptionForPatient];
+                    [doctorDB updateDoctorRequests:indexDocByDoc];
 
                     }
+                }
                     
                 } else {
                     // no request
                     NSLog(@"Hey Doc, You don't have any open requests");
+                        }
                 }
+//                    else
+//                    {
+//                        NSLog(@"Your index is out of range");
+//                    }
                 
             }
         }
@@ -111,37 +125,54 @@ int main(int argc, const char * argv[]) {
         
         while (![usersOption isEqualToString:@"exit"]) {
             
-            usersOption = [userInput inputForPrompt:@"\nView Doctors- viewdoc\nView Patients - select\nView Request - status\nExit - exit\n"];
+            usersOption = [userInput inputForPrompt:@"\nView Doctors- viewdoc\nBook an Appointment - book\nExit - exit\n"];
             
             if ([usersOption isEqualToString:@"viewdoc"])
             {
                 [doctorDB displayDoctorsArray];
                 
             }
-            else if ([usersOption isEqualToString:@"select"])
+            else if ([usersOption isEqualToString:@"book"])
             {
                 // call method to get accepted
                 [patientDB displayPatientsArray];
                 NSString *selectPat = [userInput inputForPrompt:@"Enter Patient Index"];
                 NSUInteger indexPat = [selectPat intValue];
                 
+                NSUInteger validPatientIndex = [patientDB checkIndexInArrayRangePatients:indexPat];
+                
+                if (validPatientIndex == 1) {
                 NSUInteger whetherPatientwasAccepted = [patientDB canPatientBeAccepted:indexPat];
                 
                 if (whetherPatientwasAccepted == 1) {
                     [doctorDB displayDoctorsArray];
                 NSString *selectDocByPatient = [userInput inputForPrompt:@"Enter Doctor Index"];
                 NSUInteger indexDocByPatient = [selectDocByPatient intValue];
-                    [doctorDB sendRequestToDoctor:indexDocByPatient];
-                    NSLog(@"Your request has been sent");
-                }
-                [patientDB displayPatientsArray];
                 
+                NSUInteger validDocIndex = [doctorDB checkIndexInArrayRangeDoctors:indexDocByPatient];
+                    
+                    if (validDocIndex == 1) {
+                    [doctorDB sendRequestToDoctor:indexDocByPatient];
+                        [patientDB updatePatientRequests:indexPat];
+                    NSLog(@"Your request has been sent");
+                    [patientDB displayPatientsArray];
+                }
+//                    else {
+//                        NSLog(@"Your index is out of range");
+//                        }
+                    }
+                }
+//                else {
+//                    NSLog(@"Your index is out of range");
+//                }
                 // need this to ask user for index and pick a doc
                 
             }
         }
     } else {
-        NSLog(@"Invalid Option");
+        if (![usersOption isEqualToString:@"quit"]) {
+            NSLog(@"Invalid Option");
+        }
     }
     
     }       // while loop end
