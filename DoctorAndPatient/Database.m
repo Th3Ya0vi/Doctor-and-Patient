@@ -37,10 +37,10 @@
 -(void)displayDoctorsArray {
     
     NSUInteger length = [self.doctors count];
-    NSLog(@"Index\tName\t\t\tSpecialist\tRequests");
+    NSLog(@"Index\tName\t\t\tSpecialist\tRequests\tPatients Checked");
     for (int i = 0; i < length; i++){
         Doctor *displaydoctor = [self.doctors objectAtIndex:i];
-        NSLog(@"(%d)\t\tDr. %@\t\t%@\t\t\t%lu", i, displaydoctor.doctorName, displaydoctor.doctorSpecialization, (unsigned long)displaydoctor.requests);
+        NSLog(@"(%d)\t\tDr. %@\t\t%@\t\t\t%lu\t\t%@", i, displaydoctor.doctorName, displaydoctor.doctorSpecialization, (unsigned long)displaydoctor.requests, displaydoctor.patientsChecked);
     }
 }
 
@@ -122,17 +122,18 @@
 }
 
 // Add prescription to patient object and decrement request count
--(void)updatePatientPrescription:(NSUInteger)patientIndex andPrescription:(NSString *)string {
+-(NSString *)updatePatientPrescription:(NSUInteger)patientIndex andPrescription:(NSString *)string {
     Patient *displayPatient = [self.patients objectAtIndex:patientIndex];
     [displayPatient.patientPrescription addObject:string];
     displayPatient.patientRequests = displayPatient.patientRequests - 1;
-
+    return displayPatient.patientName;
 }
 
 // Update doctor request count (decrement)
--(void)updateDoctorRequests:(NSUInteger)doctorIndex {
+-(void)updateDoctorRequests:(NSUInteger)doctorIndex andPatientTreated:(NSString *)nameString {
     Doctor *openRequests = [self.doctors objectAtIndex:doctorIndex];
     openRequests.requests = openRequests.requests - 1;
+    [openRequests.patientsChecked addObject:nameString];
 }
 
 // Checks that user input for index is not string if string is entered its converted to integer value of 0

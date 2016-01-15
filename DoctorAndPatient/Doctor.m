@@ -17,6 +17,7 @@
         _doctorName = name;
         _doctorSpecialization = specialization;
         _requests = 0;
+        _patientsChecked = [[NSMutableArray alloc] init];
     }
     return self;
 }

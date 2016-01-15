@@ -13,6 +13,7 @@
 @property (nonatomic, copy) NSString *doctorName;
 @property (nonatomic, copy) NSString *doctorSpecialization;
 @property (nonatomic) NSUInteger requests;
+@property (nonatomic, strong) NSMutableArray *patientsChecked;
 
 - (instancetype)initWithDoctorName:(NSString *)name andSpecialization:(NSString *)specialization;
 

@@ -110,8 +110,9 @@ int main(int argc, const char * argv[]) {
                     if (patientHasRaisedRequest == 1) {
                     
                     NSString *prescriptionForPatient = [userInput inputForPrompt:@"Write Prescription"];        // Update patient object with doctor's prescription
-                    [patientDB updatePatientPrescription:indexPatByDoc andPrescription:prescriptionForPatient]; // and also decrement request count
-                    [doctorDB updateDoctorRequests:indexDocByDoc];                                              // Decrement doctor's request count
+                    NSString *patientNameTreated = [patientDB updatePatientPrescription:indexPatByDoc andPrescription:prescriptionForPatient];
+                                                                                                                // and also decrement request count
+                    [doctorDB updateDoctorRequests:indexDocByDoc andPatientTreated:patientNameTreated];         // Decrement doctor's request count
 
                         }
                     }

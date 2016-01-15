@@ -33,9 +33,9 @@
 
 -(NSUInteger)verifyPatientHasRaisedRequests:(NSUInteger)index;      // Checks if patient request number is more than 0
 
--(void)updatePatientPrescription:(NSUInteger)patientindex andPrescription:(NSString *)string;   // Add prescription to patient object and decrement request count
+-(NSString *)updatePatientPrescription:(NSUInteger)patientindex andPrescription:(NSString *)string;   // Add prescription to patient object and decrement request count
 
--(void)updateDoctorRequests:(NSUInteger)doctorIndex;                // Update doctor request count (decrement)
+-(void)updateDoctorRequests:(NSUInteger)doctorIndex andPatientTreated:(NSString *)nameString;   // Update doctor request count (decrement)
 
 -(NSUInteger)checkIndexInArrayRangePatients:(NSUInteger)index;      // Checks index value entered for patient is not beyond length of array
 
